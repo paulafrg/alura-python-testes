@@ -1,5 +1,9 @@
-# Serialização para retorno (removendo dados sensíveis)
+"""Serialização para retorno (removendo dados sensíveis)"""
 def serialize_user(user):
+    """Serializa os dados do usario:
+        Returm:
+            usuario do db
+    """
     return {
         "email": user.get("email"),
         "name": user.get("name"),
