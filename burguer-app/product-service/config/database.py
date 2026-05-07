@@ -3,10 +3,11 @@
 from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
+from pathlib import Path
 
 # Carrega as variáveis de ambiente do arquivo .env
 
-load_dotenv()
+load_dotenv(dotenv_path=Path(__file__).parent.parent / ".env")
 
 # Cria a conexão com o banco de dados MongoDB
 
