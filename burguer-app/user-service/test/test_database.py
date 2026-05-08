@@ -19,10 +19,19 @@ def test_get_db():
             db_instance = get_db()
             assert db_instance is not None
 
-def test_get_db_email(mocker):
-    mock_db = mocker.MagicMock()
-    mock_db.usuarios.find_one.return_value = {"email": "teste@exemplo.com"} 
-    mocker.patch("config.database.db", mock_db) 
+@pytest.mark.usefixtures("mongo_client")
+def test_get_db_email(mongo_client):
+    # mock_db = mongo_client.MagicMock()
+    # mock_db.usuarios.find_one.return_value = {"email": "teste@exemplo.com"} 
+    # mongo_client.patch("config.database.db", mock_db) 
 
-    resultado = mock_db.usuarios.find_one({"email": "teste@exemplo.com"})
-    assert resultado["email"] == "teste@exemplo.com"
+    # resultado = mock_db.usuarios.find_one({"email": "teste@exemplo.com"})
+    # assert resultado["email"] == "teste@exemplo.com"
+
+    user = {
+        "email": "test@exemplo.com"
+    }
+
+    result = mongo_client["users"].insert_one(user)
+    encontrado = mongo_client["users"].find_one({"_id":result.inserted_id})
+    assert encontrado["email"] == user["email"]
