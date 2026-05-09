@@ -86,3 +86,5 @@ def check_service_health(url):
         return response.status_code in [200,302,404]
     except requests.exceptions.ConnectionError:
         return False
+    
+add = 1
