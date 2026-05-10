@@ -27,4 +27,4 @@ jobs:
         - name: Rodar testes
           run: |
             cd ./burguer-app/auth-service
-            pytest -v
+            pytest -v --cov=models --cov=services --cov=config --cov=controllers --cov=utils --cov-report=xml:coverage.xml --cov-report=html:coverage_html_report
